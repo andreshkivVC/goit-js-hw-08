@@ -18,9 +18,8 @@ refs.form.addEventListener('submit', onFormSubmit);
 refs.form.addEventListener('input', throttle(onTextareaInput, 500));
 
 function onFormSubmit(evt) {
-  evt.preventDefaut();
+  evt.preventDefault();
   JSON.parse(localStorage.getItem(STORAGE_KEY));
-  // console.log(formData);
   evt.currentTarget.reset();
   console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
   localStorage.removeItem(STORAGE_KEY);
@@ -28,9 +27,9 @@ function onFormSubmit(evt) {
 
 function savedMessage() {
   const saveMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  if (saveMessage || '') {
-    refs.inputMessage.value = saveMessage.message;
-    refs.inputEmeil.value = saveMessage.email;
+  if (saveMessage) {
+    refs.inputMessage.value = saveMessage.message || '';
+    refs.inputEmeil.value = saveMessage.email || '';
     console.log(saveMessage.message);
   }
 }
